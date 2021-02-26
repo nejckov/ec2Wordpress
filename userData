@@ -1,0 +1,19 @@
+#!/bin/bash
+sudo su
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+amazon-linunx-extras disable php7.2
+amazon-linux-extras enable php8.0
+amazon-linux-extras install php8.0
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+mv ./wordpress/* /var/www/html/
+rm -rf wordpress.tar.gz
+rm -rf wordpress
+group add wordpress
+usermod -g wordpress apache
+usermod -g wordpress ec2-user
+chmod -R =775 /var/www/html
+systemctl restart httpd
