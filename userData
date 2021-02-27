@@ -12,8 +12,5 @@ tar -xzf latest.tar.gz
 mv ./wordpress/* /var/www/html/
 rm -rf wordpress.tar.gz
 rm -rf wordpress
-group add wordpress
-usermod -g wordpress apache
-usermod -g wordpress ec2-user
-chmod -R =775 /var/www/html
+chown -R apache /var/www/html
 systemctl restart httpd
